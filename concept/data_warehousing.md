@@ -1,0 +1,59 @@
+# Data Warehousing
+
+- Data Warehouse
+    - Central location to store every single data
+- Data Warehousing
+    - Process to follow to fetch data from database and store it in DWH with the help of ETL
+- ETL
+    - Database → [Staging (Raw Form) ——transformation—→ Core (Curated Form)] → Data Mart
+- Incremental Loading
+    - Change Data Capture (CDC) will be used for incremental loading
+    - Truncate will happen in Staging layer (Transient), In some cases, use Persistent
+- Data Modeling
+    - Process to structure data
+    - Conceptual → Logical → Physical
+        - Conceptual - High-level business requirements
+        - Logical - Logic like connecting tables, joining attributes, E-R
+        - Physical - Implementation - setting constraints, data types
+- Dimensional Data Modeling
+    - Store data in the form of Fact and Dimension tables
+    - Fact vs Dimension
+        - Fact
+            - Available at the most granular format
+            - Store facts that are measurements, numerical, and keys
+        - Dimension
+            - Do not store any numeric
+            - Store context information
+    - Star vs Snowflake schema
+        - Star
+            - 1 Fact and multiple Dimensions without any hierarchies
+        - Snowflake
+            - Extended version of Star
+            - 1 Fact but multiple Dimensions with hierarchies (eg., product has category)
+- Fact Table Types
+    - Granular/Transactional Fact Table
+        - 1 transaction = 1 row
+    - Periodic Fact Table
+        - Snapshot Fact Table
+        - 1 row ≠ 1 transaction
+        - 1 row = monthly transactions
+    - Accumulating Fact Table
+        - 1 row = 1 process (journey of a transaction)
+- Dimension Table Types
+    - Conformed Dimension
+        - One dimension has more than one fact tables
+    - Role Playing Dimension
+        - One dimension has more than one different roles (columns) with a fact table
+    - Junk Dimension
+        - One dimension has only one or two unique values in its column
+    - Degenerate Dimension
+        - One dimension has no context and only ID and key.
+- Slowly Changing Dimension
+    - Type-0
+        - No change
+    - Type-1
+        - Upsert
+    - Type-2
+        - History
+    - Type-3
+        - Prev Value
